@@ -1,10 +1,18 @@
-package csci2020u.tictactoe;
+package csci2020u.tictactoe.subMenu;
 
+import csci2020u.tictactoe.clientConnection.Game;
+import csci2020u.tictactoe.clientInterface.Main;
+import csci2020u.tictactoe.subMenu.ButtonHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
+/**
+ * This class instantiates all of the sub menu elements and handles all
+ * of the sub menu elements and interactions.
+ */
 
 public class SubMenu {
     private static Button playAgainButton;
@@ -12,7 +20,7 @@ public class SubMenu {
     private static Button backButtonAbout;
     protected static Button[] buttons;
     ButtonHandler[] buttonHandlers = new ButtonHandler[9];
-    protected static Game game;
+    public static Game game;
 
     public SubMenu(Stage primaryStage, Canvas[] canvasArray) {
         game = new Game();

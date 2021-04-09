@@ -16,12 +16,12 @@ public class Server {
         String[] symbol = new String[]{"X", "O"};
 
         try {
-            serverSocket = new ServerSocket(serverPort);
-            threads = new ServerThread[maxClients];
-            while(numClients < 2) {
+            serverSocket = new ServerSocket(serverPort);        // Create the server socket
+            threads = new ServerThread[maxClients];             // Create the thread array
+            while(numClients < 2) {                             // Establish a connection with the client
                 clientSocket = serverSocket.accept();
-                threads[numClients] = new ServerThread(clientSocket, symbol[numClients]);
-                threads[numClients].start();
+                threads[numClients] = new ServerThread(clientSocket, symbol[numClients]);  // Pass the client thread its socket and symbol
+                threads[numClients].start();                                               // Execute the thread
                 numClients++;
             }
             threads[0].setReady();

@@ -1,5 +1,7 @@
-package csci2020u.tictactoe;
+package csci2020u.tictactoe.clientInterface;
 
+import csci2020u.tictactoe.mainMenu.MainMenu;
+import csci2020u.tictactoe.subMenu.SubMenu;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,13 +15,17 @@ import javafx.stage.Stage;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * The main class instantiates the entire client side interface.
+ */
+
 public class Main extends Application {
-    protected static GridPane buttonGrid;
-    protected static BorderPane gameBP;
-    protected static BorderPane howToPLayBP;
-    protected static BorderPane aboutBP;
-    protected static Map<String, String> choices;
-    protected static Scene menuScene;
+    public static GridPane buttonGrid;
+    public static BorderPane gameBP;
+    public static BorderPane howToPLayBP;
+    public static BorderPane aboutBP;
+    public static Map<String, String> choices;
+    public static Scene menuScene;
 
     @Override
     public void start(Stage primaryStage) {

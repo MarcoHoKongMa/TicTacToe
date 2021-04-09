@@ -1,9 +1,11 @@
-package csci2020u.tictactoe;
+package csci2020u.tictactoe.subMenu;
 
+import csci2020u.tictactoe.Draw;
+import csci2020u.tictactoe.clientInterface.Main;
 import javafx.scene.canvas.Canvas;
 
 public class ButtonHandler {
-    protected static String playerSymobol;
+    public static String playerSymobol;
     protected static String oppoSymbol;
 
     public ButtonHandler(int index, int row, int col, Canvas[] canvasArray, String[] buttonNames) {

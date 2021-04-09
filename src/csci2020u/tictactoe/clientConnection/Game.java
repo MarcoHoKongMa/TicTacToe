@@ -1,5 +1,7 @@
-package csci2020u.tictactoe;
+package csci2020u.tictactoe.clientConnection;
 
+import csci2020u.tictactoe.AlertThread;
+import csci2020u.tictactoe.subMenu.ButtonHandler;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 

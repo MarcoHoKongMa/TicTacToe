@@ -1,5 +1,8 @@
-package csci2020u.tictactoe;
+package csci2020u.tictactoe.mainMenu;
 
+import csci2020u.tictactoe.subMenu.About;
+import csci2020u.tictactoe.subMenu.SubMenu;
+import csci2020u.tictactoe.clientInterface.Main;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -9,6 +12,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.File;
+
+/**
+ * The class instantiates all of the main menu elements and handles all of the elements
+ * interactions in the main menu.
+ */
 
 public class MainMenu {
     // Menu Components
