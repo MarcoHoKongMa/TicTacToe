@@ -1,25 +1,16 @@
 package csci2020u.tictactoe;
 
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-
-import java.util.*;
 
 public class ButtonHandler {
-    private int iter;
-
-    public void createButton(int iter, int row, int col, Canvas[] canvasArray, String[] buttonNames) {
-        this.iter = iter;
-
-        Main.buttons[iter].setOnAction(actionEvent -> {
+    public ButtonHandler(int index, int row, int col, Canvas[] canvasArray, String[] buttonNames) {
+        SubMenu.buttons[index].setOnAction(actionEvent -> {
             //Make button inaccessible
-            Main.buttons[iter].setDisable(true);
+            SubMenu.buttons[index].setDisable(true);
 
             //Replacing Button with respective Canvas for symbol display
 
-            Main.buttonGrid.add(canvasArray[iter],col,row);
+            Main.buttonGrid.add(canvasArray[index],col,row);
 
             //Updating the buttonGrid
             Main.gameBP.setCenter(Main.buttonGrid);
@@ -29,10 +20,10 @@ public class ButtonHandler {
 
             //if player is X (Client 1)
             //draw X
-            newChoice.drawSymbol("X",canvasArray[iter], Main.gameBP);
+            newChoice.drawSymbol("X",canvasArray[index], Main.gameBP);
 
             //set buttonNames[i] as 'X' for Tic-Tac-Toe logic
-            Main.choices.put(buttonNames[iter],"X");
+            Main.choices.put(buttonNames[index],"X");
 
             //else if player is O (Client 2)
             //draw O
