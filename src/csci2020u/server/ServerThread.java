@@ -8,8 +8,8 @@ public class ServerThread extends Thread {
     private BufferedReader serverInput = null;
     private PrintWriter serverOutput = null;
     private String symbol;
-    protected boolean ready = false;
-    protected boolean shownFirstPlayerMessage = false;
+    private boolean ready = false;
+    private boolean shownFirstPlayerMessage = false;
 
     public ServerThread(Socket socket, String symbol) {
         try {
@@ -27,12 +27,22 @@ public class ServerThread extends Thread {
             if(!ready) {
                 if(!shownFirstPlayerMessage) {
                     serverOutput.println("Searching for your opponent");
+                    shownFirstPlayerMessage = true;
                 }
             }
             else {
+                System.out.println(symbol);
                 serverOutput.println(symbol);
+                break;
             }
         }
+//        try {
+//            socket.close();
+//            serverInput.close();
+//            serverOutput.close();
+//        } catch(IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public void setReady() {

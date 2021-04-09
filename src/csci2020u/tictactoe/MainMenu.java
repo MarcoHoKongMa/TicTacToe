@@ -52,7 +52,7 @@ public class MainMenu {
             primaryStage.setScene(matchScene);
             primaryStage.show();
 
-            SubMenu.game.run();
+            SubMenu.game.run(primaryStage);
         });
 
         // HOW TO PLAY BUTTON HANDLING

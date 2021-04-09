@@ -64,17 +64,17 @@ public class Draw {
             gc.setStroke(Color.BLUE);
             gc.setFill(Color.BLUE);
 
-            gc.strokeRect(0,0,50,10);
-            gc.fillRect(0,0,50,10);
+            gc.strokeRect(25,25,50,10);
+            gc.fillRect(25,25,50,10);
 
-            gc.strokeRect(0,0,10,50);
-            gc.fillRect(0,0,10,50);
+            gc.strokeRect(25,25,10,50);
+            gc.fillRect(25,25,10,50);
 
-            gc.strokeRect(0,40,50,10);
-            gc.fillRect(0,40,50,10);
+            gc.strokeRect(25,40+25,50,10);
+            gc.fillRect(25,40+25,50,10);
 
-            gc.strokeRect(40,0,10,50);
-            gc.fillRect(40,0,10,50);
+            gc.strokeRect(40+25,25,10,50);
+            gc.fillRect(40+25,25,10,50);
         }
 
     }
