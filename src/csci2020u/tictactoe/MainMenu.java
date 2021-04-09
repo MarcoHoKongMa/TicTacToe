@@ -51,6 +51,8 @@ public class MainMenu {
             //Switches to matchScene
             primaryStage.setScene(matchScene);
             primaryStage.show();
+
+            SubMenu.game.run();
         });
 
         // HOW TO PLAY BUTTON HANDLING

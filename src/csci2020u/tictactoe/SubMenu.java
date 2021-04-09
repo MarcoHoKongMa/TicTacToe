@@ -4,14 +4,18 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class SubMenu {
     private static Button playAgainButton;
     private static Button backButtonHowToPlay;
     private static Button backButtonAbout;
     protected static Button[] buttons;
     ButtonHandler[] buttonHandlers = new ButtonHandler[9];
+    protected static Game game;
 
     public SubMenu(Stage primaryStage, Canvas[] canvasArray) {
+        game = new Game();
         playAgainButton = new Button("PLAY AGAIN");
         backButtonHowToPlay = new Button("Back to Menu");
         backButtonAbout = new Button("Back to Menu");
@@ -36,7 +40,6 @@ public class SubMenu {
         }
 
 //------IN GAME BUTTON HANDLERS
-
         String[] buttonNames = { "topLeft", "topCenter", "topRight", "centerLeft", "center", "centerRight",
                 "bottomLeft", "bottomCenter", "bottomRight" };
         //--CHOICE BUTTON HANDLERS
@@ -62,6 +65,12 @@ public class SubMenu {
             for (int i=0; i < buttons.length; i++){
                 Main.buttonGrid.getChildren().remove(canvasArray[i]);
                 buttons[i].setDisable(false);
+            }
+
+            try {
+                game.end();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
 
