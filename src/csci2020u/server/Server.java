@@ -20,7 +20,7 @@ public class Server {
             threads = new ServerThread[maxClients];             // Create the thread array
             while(numClients < 2) {                             // Establish a connection with the client
                 clientSocket = serverSocket.accept();
-                threads[numClients] = new ServerThread(clientSocket, symbol[numClients]);  // Pass the client thread its socket and symbol
+                threads[numClients] = new ServerThread(clientSocket, symbol[numClients], numClients);  // Pass the client thread its socket and symbol
                 threads[numClients].start();                                               // Execute the thread
                 numClients++;
             }

@@ -30,15 +30,14 @@ public class Game {
             String message;
             message = clientInput.readLine();
             String searching = message;
-            Alert search;
-            AlertThread alertThread;
+//            Alert search;
+//            AlertThread alertThread;
             if(searching.equals("Searching for your opponent")) {
 //                search = new Alert(Alert.AlertType.INFORMATION, searching);
 //                alertThread = new AlertThread(search);
 //                alertThread.start();
                 System.out.println(searching);
-                System.out.println(clientInput.readLine());
-                System.out.println("Testing 1");
+                message = clientInput.readLine();
             }
 
 //            search = new Alert(Alert.AlertType.INFORMATION, "Your opponent has been found");
