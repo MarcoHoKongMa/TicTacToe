@@ -19,7 +19,7 @@ public class SubMenu {
     private static Button backButtonHowToPlay;
     private static Button backButtonAbout;
     protected static Button[] buttons;
-    ButtonHandler[] buttonHandlers = new ButtonHandler[9];
+    public static ButtonHandler[] buttonHandlers = new ButtonHandler[9];
     public static Game game;
 
     public SubMenu(Stage primaryStage, Canvas[] canvasArray) {
@@ -48,13 +48,12 @@ public class SubMenu {
         }
 
 //------IN GAME BUTTON HANDLERS
-        String[] buttonNames = { "topLeft", "topCenter", "topRight", "centerLeft", "center", "centerRight",
-                "bottomLeft", "bottomCenter", "bottomRight" };
+
         //--CHOICE BUTTON HANDLERS
         int a = 0;
         for(int row = 0; row < 3; row++) {
             for(int col = 0; col < 3; col++) {
-                buttonHandlers[a] = new ButtonHandler(a, row, col, canvasArray, buttonNames);
+                buttonHandlers[a] = new ButtonHandler(a, row, col, canvasArray);
                 a++;
             }
         }

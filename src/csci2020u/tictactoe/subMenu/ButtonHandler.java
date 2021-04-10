@@ -1,14 +1,21 @@
 package csci2020u.tictactoe.subMenu;
 
 import csci2020u.tictactoe.Draw;
+import csci2020u.tictactoe.clientConnection.Game;
 import csci2020u.tictactoe.clientInterface.Main;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
 
 public class ButtonHandler {
-    public static String playerSymobol;
-    protected static String oppoSymbol;
+    public static String playerSymbol;
+    public static String oppoSymbol;
+    private int row;
+    private int col;
 
-    public ButtonHandler(int index, int row, int col, Canvas[] canvasArray, String[] buttonNames) {
+    public ButtonHandler(int index, int row, int col, Canvas[] canvasArray) {
+        this.row = row;
+        this.col = col;
+
         SubMenu.buttons[index].setOnAction(actionEvent -> {
             //Make button inaccessible
             SubMenu.buttons[index].setDisable(true);
@@ -23,19 +30,42 @@ public class ButtonHandler {
             //New instance to draw 'X' or 'O' symbol
             Draw newChoice = new Draw();
 
-            //if player is X (Client 1)
-            //draw X
-            newChoice.drawSymbol(playerSymobol,canvasArray[index], Main.gameBP);
+            // Draw player symbol
+            newChoice.drawSymbol(playerSymbol,canvasArray[index], Main.gameBP);
 
-            //set buttonNames[i] as 'X' for Tic-Tac-Toe logic
-            Main.choices.put(buttonNames[index], playerSymobol);
+            Game.updateBoard(index);
 
-            //else if player is O (Client 2)
-            //draw O
-            //newChoice.drawSymbol("O",cTopLeft,gameBP);
-
-            //set topLeft as 'O' for Tic-Tac-Toe logic
-            //choices.put("topLeft","O");
+            Game.madeTurn = true;
         });
+    }
+
+    public void drawOppoMove(int index) {
+        //Make button inaccessible
+        SubMenu.buttons[index].setDisable(true);
+
+        //Replacing Button with respective Canvas for symbol display
+
+        Main.buttonGrid.add(Main.canvasArray[index],col,row);
+
+        //Updating the buttonGrid
+        Main.gameBP.setCenter(Main.buttonGrid);
+
+        //New instance to draw 'X' or 'O' symbol
+        Draw newChoice = new Draw();
+
+        // Draw player symbol
+        newChoice.drawSymbol(playerSymbol, Main.canvasArray[index], Main.gameBP);
+    }
+
+    public void disable() {
+        for(Button button : SubMenu.buttons) {
+            button.setDisable(true);
+        }
+    }
+
+    public void enable() {
+        for(Button button : SubMenu.buttons) {
+            button.setDisable(false);
+        }
     }
 }

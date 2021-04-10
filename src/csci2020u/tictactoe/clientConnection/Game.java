@@ -2,6 +2,7 @@ package csci2020u.tictactoe.clientConnection;
 
 import csci2020u.tictactoe.AlertThread;
 import csci2020u.tictactoe.subMenu.ButtonHandler;
+import csci2020u.tictactoe.subMenu.SubMenu;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
@@ -9,9 +10,12 @@ import java.io.*;
 import java.net.Socket;
 
 public class Game {
-    private PrintWriter clientOutput;
-    private BufferedReader clientInput;
+    private static PrintWriter clientOutput;
+    private static BufferedReader clientInput;
     private Socket socket;
+    private int turns = 0;
+    private int myTurn = 0;
+    public static boolean madeTurn = false;
 
     public void run(Stage primaryStage) {
         try {
@@ -48,12 +52,45 @@ public class Game {
             System.out.println("Your opponent has been found");
             primaryStage.show();
 
-            ButtonHandler.playerSymobol = message;
+            ButtonHandler.playerSymbol = message;
+            if(message.equals("X")) {
+                ButtonHandler.oppoSymbol = "O";
+            }
+            else {
+                ButtonHandler.oppoSymbol = "X";
+            }
+
+            while(turns < 10) {
+                // Update turns
+                myTurn = Integer.parseInt(clientInput.readLine());
+                if(myTurn == 0) {
+                    // Disable
+                    SubMenu.buttonHandlers[0].disable();
+                    // Get opponent's move
+                    int index = Integer.parseInt(clientInput.readLine());
+                    SubMenu.buttonHandlers[index].drawOppoMove(index);
+                }
+                else {
+                    // Enable
+                    SubMenu.buttonHandlers[0].enable();
+                    // Make a move
+                    while(!madeTurn) {
+
+                    }
+                    madeTurn = false;
+                }
+
+                turns++;
+            }
         } catch(IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "CONNECTION ERROR\nThis program will now be exited");
             alert.showAndWait();
             System.exit(1);
         }
+    }
+
+    public static void updateBoard(int index) {
+        clientOutput.println(index);
     }
 
     public void end() throws IOException {

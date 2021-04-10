@@ -50,4 +50,22 @@ public class ServerThread extends Thread {
     public void setReady() {
         ready = true;
     }
+
+    public void makeMove() {
+        int move = -1;
+        try {
+            move = Integer.parseInt(serverInput.readLine());
+            Server.updateBoard(move);
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateTurn(int condition) {
+        serverOutput.println(condition);
+    }
+
+    public void updateOppoMove(int index) {
+        serverOutput.println(index);
+    }
 }

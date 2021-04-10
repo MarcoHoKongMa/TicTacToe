@@ -26,6 +26,7 @@ public class Main extends Application {
     public static BorderPane aboutBP;
     public static Map<String, String> choices;
     public static Scene menuScene;
+    public static Canvas[] canvasArray;
 
     @Override
     public void start(Stage primaryStage) {
@@ -46,7 +47,7 @@ public class Main extends Application {
         gameBP.setCenter(buttonGrid);
 
         //Canvases that display either 'X' or 'O' in their slot
-        Canvas[] canvasArray = new Canvas[9];
+        canvasArray = new Canvas[9];
         for (int i=0; i<canvasArray.length; i++){
             canvasArray[i] = new Canvas();
             canvasArray[i].setWidth(100);
