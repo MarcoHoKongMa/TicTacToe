@@ -98,6 +98,10 @@ public class MainMenu {
         Main.aboutBP.setStyle("-fx-focus-color: lightgray; -fx-faint-focus-color: transparent;");
     }
 
+    /**
+     * Getter function that returns a the menuGrid
+     * @return VBox.
+     */
     public VBox getMenu() {
         return menuGrid;
     }

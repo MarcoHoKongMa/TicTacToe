@@ -5,14 +5,15 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 
-
+/**
+ * Draw class is used to draw a symbol 'X' or 'O' onto a canvas.
+ */
 
 public class Draw {
 
     /*
-     * Function uses GraphicsContext to draw given symbol
+     * Function uses GraphicsContext to draw given symbol 'X' or 'O'
      * to the buttonGrid.
-     *
      * @param choice: the symbol being drawn
      * @param c: the Canvas that is being drawn on
      * @param b: the BorderPane that displays the canvas
@@ -25,7 +26,6 @@ public class Draw {
         if (choice.equals("X")){
 
             //Draw 'X'
-
             gc.setStroke(Color.BLACK);
             gc.setFill(Color.BLACK);
 
@@ -60,7 +60,6 @@ public class Draw {
         else if(choice.equals("O")){
 
             //Draw 'O'
-
             gc.setStroke(Color.BLUE);
             gc.setFill(Color.BLUE);
 

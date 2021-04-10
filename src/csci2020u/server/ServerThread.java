@@ -12,6 +12,7 @@ public class ServerThread extends Thread {
     private boolean shownFirstPlayerMessage = false;
     private int num;
 
+    // Constructor
     public ServerThread(Socket socket, String symbol, int num) {
         try {
             this.num = num;
@@ -25,6 +26,7 @@ public class ServerThread extends Thread {
     }
 
     public void run() {
+        // Waits for a second client connection
         while(true) {
             System.out.println(num + ": Not Ready");            // Needed to avoid java Threads bug
             if(!ready) {
@@ -47,9 +49,14 @@ public class ServerThread extends Thread {
         }
     }
 
+    /**
+     * Updates the ready variable to indicate that a second client has
+     * connected to the server.
+     */
     public void setReady() {
         ready = true;
     }
+
 
     public void makeMove() {
         int move = -1;

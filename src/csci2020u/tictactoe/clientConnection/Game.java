@@ -10,6 +10,7 @@ import java.io.*;
 import java.net.Socket;
 
 public class Game {
+    // Game class Parameters
     private static PrintWriter clientOutput;
     private static BufferedReader clientInput;
     private Socket socket;
