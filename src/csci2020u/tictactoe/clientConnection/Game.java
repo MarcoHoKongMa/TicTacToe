@@ -15,7 +15,7 @@ public class Game {
     private static BufferedReader clientInput;
     private static Socket socket;
     private static Stage primaryStage;
-    public static int turns = 0;
+    private static int turns = 0;
 
     public void run(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -98,11 +98,16 @@ public class Game {
         try {
             int box = Integer.parseInt(clientInput.readLine());
             SubMenu.buttonHandlers[box].drawOppoMove(box);
-            if(turns < 9) {
-                getTurn();
-            }
-            else {
-                getResult();
+            try {
+                int aWin = Integer.parseInt(clientInput.readLine());
+                if(turns < 9 && aWin == 0) {
+                    getTurn();
+                }
+                else {
+                    getResult();
+                }
+            } catch(IOException e) {
+                e.printStackTrace();
             }
         } catch(IOException e) {
             e.printStackTrace();
@@ -112,7 +117,7 @@ public class Game {
     public static void getResult() {
         try {
             primaryStage.show();
-            System.out.println(clientInput.readLine());
+            System.out.println(clientInput.readLine() + "\n");
             ButtonHandler.myTurn = false;
             turns = 0;
             socket.close();
@@ -125,6 +130,17 @@ public class Game {
 
     public static void updateBoard(int index) {
         clientOutput.println(index);
+        try {
+            int aWin = Integer.parseInt(clientInput.readLine());
+            if(turns < 9 && aWin == 0) {
+                getTurn();
+            }
+            else {
+                getResult();
+            }
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void end() throws IOException {

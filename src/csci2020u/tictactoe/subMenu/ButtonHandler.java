@@ -36,13 +36,6 @@ public class ButtonHandler {
                 newChoice.drawSymbol(playerSymbol,canvasArray[index], Main.gameBP);
 
                 Game.updateBoard(index);
-
-                if(Game.turns < 9) {
-                    Game.getTurn();
-                }
-                else {
-                    Game.getResult();
-                }
             }
         });
     }

@@ -10,6 +10,7 @@ public class ServerThread extends Thread {
     private String symbol;
     private boolean ready = false;
     private boolean showFirstPlayerMessage;
+    private boolean win = false;
 
     // Constructor
     public ServerThread(Socket socket, String symbol, boolean firstPlayer) {
@@ -66,8 +67,26 @@ public class ServerThread extends Thread {
         serverOutput.println(index);
     }
 
+    public void setWin(boolean status) {
+        win = status;
+    }
+
+    public void updateWin(boolean aWin) {
+        if(aWin){
+            serverOutput.println(1);
+        }
+        else {
+            serverOutput.println(0);
+        }
+    }
+
     public void exit() {
-        serverOutput.println("Thanks for Playing");
+        if(win) {
+            serverOutput.println("CONGRATS, YOU WIN!!!");
+        }
+        else {
+            serverOutput.println("OOF, TOOK A L! Better luck next time");
+        }
         try {
             socket.close();
             serverInput.close();
