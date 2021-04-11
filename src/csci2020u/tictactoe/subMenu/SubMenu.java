@@ -2,8 +2,8 @@ package csci2020u.tictactoe.subMenu;
 
 import csci2020u.tictactoe.clientConnection.Game;
 import csci2020u.tictactoe.clientInterface.Main;
-import csci2020u.tictactoe.subMenu.ButtonHandler;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
@@ -69,9 +69,12 @@ public class SubMenu {
             Main.choices.clear();
 
             //  Remove all the canvases and Re-enable the buttons in the Grid
+            GraphicsContext gc;
             for (int i=0; i < buttons.length; i++){
                 Main.buttonGrid.getChildren().remove(canvasArray[i]);
                 buttons[i].setDisable(false);
+                gc = canvasArray[i].getGraphicsContext2D();
+                gc.clearRect(0, 0, canvasArray[i].getWidth(), canvasArray[i].getHeight());
             }
 
             try {

@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 public class ButtonHandler {
     public static String playerSymbol;
     public static String oppoSymbol;
+    public static boolean myTurn = false;
     private int row;
     private int col;
 
@@ -17,25 +18,32 @@ public class ButtonHandler {
         this.col = col;
 
         SubMenu.buttons[index].setOnAction(actionEvent -> {
-            //Make button inaccessible
-            SubMenu.buttons[index].setDisable(true);
+            if(myTurn) {
+                //Make button inaccessible
+                SubMenu.buttons[index].setDisable(true);
 
-            //Replacing Button with respective Canvas for symbol display
+                //Replacing Button with respective Canvas for symbol display
 
-            Main.buttonGrid.add(canvasArray[index],col,row);
+                Main.buttonGrid.add(canvasArray[index],col,row);
 
-            //Updating the buttonGrid
-            Main.gameBP.setCenter(Main.buttonGrid);
+                //Updating the buttonGrid
+                Main.gameBP.setCenter(Main.buttonGrid);
 
-            //New instance to draw 'X' or 'O' symbol
-            Draw newChoice = new Draw();
+                //New instance to draw 'X' or 'O' symbol
+                Draw newChoice = new Draw();
 
-            // Draw player symbol
-            newChoice.drawSymbol(playerSymbol,canvasArray[index], Main.gameBP);
+                // Draw player symbol
+                newChoice.drawSymbol(playerSymbol,canvasArray[index], Main.gameBP);
 
-            Game.updateBoard(index);
+                Game.updateBoard(index);
 
-            Game.madeTurn = true;
+                if(Game.turns < 9) {
+                    Game.getTurn();
+                }
+                else {
+                    Game.getResult();
+                }
+            }
         });
     }
 
@@ -54,18 +62,6 @@ public class ButtonHandler {
         Draw newChoice = new Draw();
 
         // Draw player symbol
-        newChoice.drawSymbol(playerSymbol, Main.canvasArray[index], Main.gameBP);
-    }
-
-    public void disable() {
-        for(Button button : SubMenu.buttons) {
-            button.setDisable(true);
-        }
-    }
-
-    public void enable() {
-        for(Button button : SubMenu.buttons) {
-            button.setDisable(false);
-        }
+        newChoice.drawSymbol(oppoSymbol, Main.canvasArray[index], Main.gameBP);
     }
 }

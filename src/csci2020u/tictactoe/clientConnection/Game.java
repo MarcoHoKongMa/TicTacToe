@@ -13,12 +13,12 @@ public class Game {
     // Game class Parameters
     private static PrintWriter clientOutput;
     private static BufferedReader clientInput;
-    private Socket socket;
-    private int turns = 0;
-    private int myTurn = 0;
-    public static boolean madeTurn = false;
+    private static Socket socket;
+    private static Stage primaryStage;
+    public static int turns = 0;
 
     public void run(Stage primaryStage) {
+        this.primaryStage = primaryStage;
         try {
             socket = new Socket("127.0.0.1", 1024);                            // Connect to the server
             clientOutput = new PrintWriter(socket.getOutputStream(), true);            // Output stream
@@ -61,27 +61,31 @@ public class Game {
                 ButtonHandler.oppoSymbol = "X";
             }
 
-            while(turns < 10) {
-                // Update turns
-                myTurn = Integer.parseInt(clientInput.readLine());
-                if(myTurn == 0) {
-                    // Disable
-                    SubMenu.buttonHandlers[0].disable();
-                    // Get opponent's move
-                    int index = Integer.parseInt(clientInput.readLine());
-                    SubMenu.buttonHandlers[index].drawOppoMove(index);
-                }
-                else {
-                    // Enable
-                    SubMenu.buttonHandlers[0].enable();
-                    // Make a move
-                    while(!madeTurn) {
+            getTurn();
+        } catch(IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "CONNECTION ERROR\nThis program will now be exited");
+            alert.showAndWait();
+            System.exit(1);
+        }
+    }
 
-                    }
-                    madeTurn = false;
-                }
-
-                turns++;
+    public static void getTurn() {
+        try {
+            int myTurn;
+            // Update turns
+            myTurn = Integer.parseInt(clientInput.readLine());
+            turns++;
+            if(myTurn == 0) {
+                // Disable
+                ButtonHandler.myTurn = false;
+                primaryStage.hide();
+                // Get opponent's move
+                getOppoMove();
+            }
+            else {
+                // Enable
+                ButtonHandler.myTurn = true;
+                primaryStage.show();
             }
         } catch(IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "CONNECTION ERROR\nThis program will now be exited");
@@ -90,11 +94,42 @@ public class Game {
         }
     }
 
+    public static void getOppoMove() {
+        try {
+            int box = Integer.parseInt(clientInput.readLine());
+            SubMenu.buttonHandlers[box].drawOppoMove(box);
+            if(turns < 9) {
+                getTurn();
+            }
+            else {
+                getResult();
+            }
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void getResult() {
+        try {
+            primaryStage.show();
+            System.out.println(clientInput.readLine());
+            ButtonHandler.myTurn = false;
+            turns = 0;
+            socket.close();
+            clientOutput.close();
+            clientInput.close();
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void updateBoard(int index) {
         clientOutput.println(index);
     }
 
     public void end() throws IOException {
+        ButtonHandler.myTurn = false;
+        turns = 0;
         socket.close();
         clientOutput.close();
         clientInput.close();

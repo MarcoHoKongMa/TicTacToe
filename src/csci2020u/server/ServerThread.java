@@ -9,15 +9,14 @@ public class ServerThread extends Thread {
     private PrintWriter serverOutput = null;
     private String symbol;
     private boolean ready = false;
-    private boolean shownFirstPlayerMessage = false;
-    private int num;
+    private boolean showFirstPlayerMessage;
 
     // Constructor
-    public ServerThread(Socket socket, String symbol, int num) {
+    public ServerThread(Socket socket, String symbol, boolean firstPlayer) {
         try {
-            this.num = num;
             this.socket = socket;
             this.symbol = symbol;
+            this.showFirstPlayerMessage = firstPlayer;
             this.serverInput = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.serverOutput = new PrintWriter(socket.getOutputStream(), true);
         } catch(IOException e) {
@@ -28,24 +27,15 @@ public class ServerThread extends Thread {
     public void run() {
         // Waits for a second client connection
         while(true) {
-            System.out.println(num + ": Not Ready");            // Needed to avoid java Threads bug
             if(!ready) {
-                if(!shownFirstPlayerMessage) {
+                if(showFirstPlayerMessage) {
                     serverOutput.println("Searching for your opponent");
-                    shownFirstPlayerMessage = true;
+                    showFirstPlayerMessage = false;
                 }
             }
             else {
-                serverOutput.println(symbol);
                 break;
             }
-        }
-        try {
-            socket.close();
-            serverInput.close();
-            serverOutput.close();
-        } catch(IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -54,9 +44,9 @@ public class ServerThread extends Thread {
      * connected to the server.
      */
     public void setReady() {
+        serverOutput.println(symbol);
         ready = true;
     }
-
 
     public void makeMove() {
         int move = -1;
@@ -74,5 +64,16 @@ public class ServerThread extends Thread {
 
     public void updateOppoMove(int index) {
         serverOutput.println(index);
+    }
+
+    public void exit() {
+        serverOutput.println("Thanks for Playing");
+        try {
+            socket.close();
+            serverInput.close();
+            serverOutput.close();
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 }

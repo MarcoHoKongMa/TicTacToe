@@ -48,7 +48,7 @@ public class Main extends Application {
 
         //Canvases that display either 'X' or 'O' in their slot
         canvasArray = new Canvas[9];
-        for (int i=0; i<canvasArray.length; i++){
+        for (int i=0; i<canvasArray.length; i++) {
             canvasArray[i] = new Canvas();
             canvasArray[i].setWidth(100);
             canvasArray[i].setHeight(100);
