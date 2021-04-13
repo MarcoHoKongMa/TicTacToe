@@ -1,5 +1,6 @@
 package csci2020u.client.clientInterface;
 
+import csci2020u.client.clientConnection.Game;
 import csci2020u.client.mainMenu.MainMenu;
 import csci2020u.client.subMenu.SubMenu;
 import javafx.application.Application;
@@ -83,6 +84,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        Game.ip = args[0];
         launch(args);
     }
 }

@@ -10,6 +10,7 @@ import java.net.Socket;
 
 public class Game {
     // Game class Parameters
+    public static String ip;
     private static PrintWriter clientOutput;
     private static BufferedReader clientInput;
     private static Socket socket;
@@ -24,7 +25,7 @@ public class Game {
     public void run(Stage primaryStage) {
         this.primaryStage = primaryStage;
         try {
-            socket = new Socket("127.0.0.1", 1024);                            // Connect to the server
+            socket = new Socket(ip, 1024);                                                 // Connect to the server
             clientOutput = new PrintWriter(socket.getOutputStream(), true);            // Output stream
             clientInput = new BufferedReader(new InputStreamReader(socket.getInputStream()));   // Input Stream
         } catch(IOException e) {
