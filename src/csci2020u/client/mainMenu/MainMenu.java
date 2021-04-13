@@ -1,8 +1,8 @@
-package csci2020u.tictactoe.mainMenu;
+package csci2020u.client.mainMenu;
 
-import csci2020u.tictactoe.subMenu.About;
-import csci2020u.tictactoe.subMenu.SubMenu;
-import csci2020u.tictactoe.clientInterface.Main;
+import csci2020u.client.subMenu.About;
+import csci2020u.client.subMenu.SubMenu;
+import csci2020u.client.clientInterface.Main;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -21,12 +21,12 @@ import java.io.File;
 public class MainMenu {
     // Menu Components
     protected Button playButton;
-    protected Button howToPlayButton;
     protected Button aboutButton;
     private static VBox menuGrid;
 
-    public MainMenu(Stage primaryStage, Button playAgainButton, Scene matchScene, Button backButtonHowToPlay,
-                    Scene howToPlayScene, Button backButtonAbout, Scene aboutScene) {
+    // Constructor
+    public MainMenu(Stage primaryStage, Button playAgainButton, Scene matchScene, Button backButtonAbout,
+                    Scene aboutScene) {
         Button[] menuButtons;
         Text menuTitle;
 
@@ -36,9 +36,8 @@ public class MainMenu {
 
         //  Main Menu Buttons
         playButton = new Button("PLAY");
-        howToPlayButton = new Button("HOW TO PLAY");
         aboutButton = new Button("ABOUT");
-        menuButtons = new Button[]{playButton, howToPlayButton, aboutButton};
+        menuButtons = new Button[]{playButton, aboutButton};
         menuGrid = new VBox();
 
         menuGrid.getChildren().add(menuTitle);
@@ -63,17 +62,6 @@ public class MainMenu {
             SubMenu.game.run(primaryStage);
         });
 
-        // HOW TO PLAY BUTTON HANDLING
-        howToPlayButton.setOnAction(actionEvent -> {
-            Main.howToPLayBP.setTop(backButtonHowToPlay);
-
-            //Parses a txt File, displaying all game rules
-
-            //Switches to howToPlayScene
-            primaryStage.setScene(howToPlayScene);
-            primaryStage.show();
-        });
-
         // ABOUT BUTTON HANDLING
         aboutButton.setOnAction(actionEvent -> {
             About newAboutPage = new About();
@@ -94,7 +82,6 @@ public class MainMenu {
 
         Main.buttonGrid.setStyle("-fx-focus-color: lightgray; -fx-faint-focus-color: transparent;");
         Main.gameBP.setStyle("-fx-focus-color: lightgray; -fx-faint-focus-color: transparent;");
-        Main.howToPLayBP.setStyle("-fx-focus-color: lightgray; -fx-faint-focus-color: transparent;");
         Main.aboutBP.setStyle("-fx-focus-color: lightgray; -fx-faint-focus-color: transparent;");
     }
 

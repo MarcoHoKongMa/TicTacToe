@@ -4,8 +4,10 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class WinChecker {
+    // WinChecker Class Parameter
     private Map<Integer, Boolean> symbolLocation;
 
+    // Constructor
     public WinChecker() {
         this.symbolLocation = new TreeMap<>();
         for(int i = 0; i < 9; i++) {
@@ -13,6 +15,10 @@ public class WinChecker {
         }
     }
 
+    /**
+     * Checks to see if the client has a achieved 3 symbol in a straight line.
+     * @return Boolean.
+     */
     public boolean checkWin() {
         // Check 5 critical points(Points at (1, j) & (i, 1))
         if(symbolLocation.get(0)) {

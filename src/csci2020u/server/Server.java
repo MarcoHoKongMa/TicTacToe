@@ -5,12 +5,12 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Server {
+    // Server Class Parameters
     private static int player;
     private static ServerThread[] threads;
     private static WinChecker[] winCheckers;
 
     public static void main(String[] args) {
-        // Server class parameters
         int numClients;
         int serverPort = 1024;
         int maxClients = 2;
@@ -48,14 +48,14 @@ public class Server {
 
                 // Begin assigning turns to the clients
                 while(turns < 9 && !aWin) {
-                    if(player == 0) {
+                    if(player == 0) {                       // First Player
                         threads[0].updateTurn(1);
                         threads[1].updateTurn(0);
                         threads[0].makeMove();
                         aWin = winCheckers[0].checkWin();
                         threads[0].setWin(aWin);
                     }
-                    else {
+                    else {                                  // Second Player
                         threads[0].updateTurn(0);
                         threads[1].updateTurn(1);
                         threads[1].makeMove();
@@ -76,6 +76,12 @@ public class Server {
         }
     }
 
+    /**
+     * A helper function that is used to send to a client
+     * which button was pressed by their opponent. The function
+     * also updates both clients sides winChecker instance.
+     * @param move index from 0-8.
+     */
     public static void updateBoard(int move) {
         if(player == 0) {
             threads[1].updateOppoMove(move);

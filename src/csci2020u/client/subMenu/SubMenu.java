@@ -1,7 +1,7 @@
-package csci2020u.tictactoe.subMenu;
+package csci2020u.client.subMenu;
 
-import csci2020u.tictactoe.clientConnection.Game;
-import csci2020u.tictactoe.clientInterface.Main;
+import csci2020u.client.clientConnection.Game;
+import csci2020u.client.clientInterface.Main;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -15,17 +15,17 @@ import java.io.IOException;
  */
 
 public class SubMenu {
+    // SubMenu Class Parameters
     private static Button playAgainButton;
-    private static Button backButtonHowToPlay;
     private static Button backButtonAbout;
     protected static Button[] buttons;
     public static ButtonHandler[] buttonHandlers = new ButtonHandler[9];
     public static Game game;
 
+    // Constructor
     public SubMenu(Stage primaryStage, Canvas[] canvasArray) {
         game = new Game();
         playAgainButton = new Button("PLAY AGAIN");
-        backButtonHowToPlay = new Button("Back to Menu");
         backButtonAbout = new Button("Back to Menu");
 
         //  BUTTONS FOR ALL POSSIBLE CHOICES
@@ -86,14 +86,6 @@ public class SubMenu {
 
 //------BACK BUTTON HANDLERS
 
-        // HOW TO PLAY BACK BUTTON
-        backButtonHowToPlay.setOnAction(actionEvent -> {
-
-            //Switches to mainScene
-            primaryStage.setScene(Main.menuScene);
-            primaryStage.show();
-        });
-
         // ABOUT BACK BUTTON
         backButtonAbout.setOnAction(actionEvent -> {
 
@@ -103,14 +95,18 @@ public class SubMenu {
         });
     }
 
+    /**
+     * Getter function to return the playAgainButton.
+     * @return Button.
+     */
     public Button getPlayAgain() {
         return playAgainButton;
     }
 
-    public Button getBackButtonHowToPlay() {
-        return backButtonHowToPlay;
-    }
-
+    /**
+     * Getter function to return the backButtonAbout.
+     * @return Button.
+     */
     public Button getBackButtonAbout() {
         return backButtonAbout;
     }

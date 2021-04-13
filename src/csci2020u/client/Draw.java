@@ -1,4 +1,4 @@
-package csci2020u.tictactoe;
+package csci2020u.client;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;

@@ -1,4 +1,4 @@
-package csci2020u.tictactoe.subMenu;
+package csci2020u.client.subMenu;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;

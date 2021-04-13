@@ -1,7 +1,7 @@
-package csci2020u.tictactoe.clientInterface;
+package csci2020u.client.clientInterface;
 
-import csci2020u.tictactoe.mainMenu.MainMenu;
-import csci2020u.tictactoe.subMenu.SubMenu;
+import csci2020u.client.mainMenu.MainMenu;
+import csci2020u.client.subMenu.SubMenu;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -22,7 +22,6 @@ import java.util.TreeMap;
 public class Main extends Application {
     public static GridPane buttonGrid;
     public static BorderPane gameBP;
-    public static BorderPane howToPLayBP;
     public static BorderPane aboutBP;
     public static Map<String, String> choices;
     public static Scene menuScene;
@@ -56,16 +55,9 @@ public class Main extends Application {
 
         // Sub Menu Elements
         SubMenu subMenu = new SubMenu(primaryStage, canvasArray);
-
         Scene matchScene = new Scene(gameBP);
         Button playAgainButton = subMenu.getPlayAgain();
 
-//------HOW TO PLAY SCENE SET UP
-
-        //BorderPane for About
-        howToPLayBP = new BorderPane();
-        Scene howToPlayScene = new Scene(howToPLayBP,500,500);
-        Button backButtonHowToPlay = subMenu.getBackButtonHowToPlay();
 
 //------ABOUT SCENE SET UP
 
@@ -76,8 +68,7 @@ public class Main extends Application {
 
 //------MAIN MENU SCENE SET UP
         // Main Menu
-        MainMenu mainMenu = new MainMenu(primaryStage, playAgainButton, matchScene, backButtonHowToPlay, howToPlayScene
-                , backButtonAbout, aboutScene);
+        MainMenu mainMenu = new MainMenu(primaryStage, playAgainButton, matchScene, backButtonAbout, aboutScene);
 
         //  Main Menu Layout
         menuGrid = mainMenu.getMenu();

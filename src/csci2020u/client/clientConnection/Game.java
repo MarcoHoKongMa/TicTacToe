@@ -1,8 +1,7 @@
-package csci2020u.tictactoe.clientConnection;
+package csci2020u.client.clientConnection;
 
-import csci2020u.tictactoe.AlertThread;
-import csci2020u.tictactoe.subMenu.ButtonHandler;
-import csci2020u.tictactoe.subMenu.SubMenu;
+import csci2020u.client.subMenu.ButtonHandler;
+import csci2020u.client.subMenu.SubMenu;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
@@ -17,6 +16,11 @@ public class Game {
     private static Stage primaryStage;
     private static int turns = 0;
 
+    /**
+     * This function recieves output form the server and performs
+     * actions to update the client side interface.
+     * @param primaryStage
+     */
     public void run(Stage primaryStage) {
         this.primaryStage = primaryStage;
         try {
@@ -30,26 +34,14 @@ public class Game {
             System.exit(1);
         }
 
+
         try {
             primaryStage.hide();
-            String message;
-            message = clientInput.readLine();
-            String searching = message;
-//            Alert search;
-//            AlertThread alertThread;
-            if(searching.equals("Searching for your opponent")) {
-//                search = new Alert(Alert.AlertType.INFORMATION, searching);
-//                alertThread = new AlertThread(search);
-//                alertThread.start();
-                System.out.println(searching);
-                message = clientInput.readLine();
+            String message = clientInput.readLine();
+            if(message.equals("Searching for your opponent")) {
+                System.out.println(message);
+                message = clientInput.readLine();       // Obtain client symbol
             }
-
-//            search = new Alert(Alert.AlertType.INFORMATION, "Your opponent has been found");
-//            alertThread = new AlertThread(search);
-//            alertThread.start();
-//            search.hide();
-//            search.show();
             System.out.println("Your opponent has been found");
             primaryStage.show();
 
@@ -61,7 +53,7 @@ public class Game {
                 ButtonHandler.oppoSymbol = "X";
             }
 
-            getTurn();
+            getTurn(); // Call a helper function
         } catch(IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "CONNECTION ERROR\nThis program will now be exited");
             alert.showAndWait();
@@ -69,9 +61,13 @@ public class Game {
         }
     }
 
+    /**
+     * Function displays the interface is it is their turn. Otherwise the function
+     * calls a helper function to obtain the opponent clients move.
+     */
     public static void getTurn() {
         try {
-            int myTurn;
+            int myTurn;             // Either 1 or 0
             // Update turns
             myTurn = Integer.parseInt(clientInput.readLine());
             turns++;
@@ -94,6 +90,10 @@ public class Game {
         }
     }
 
+    /**
+     * Function gets the index for the button that the opponent
+     * client pressed.
+     */
     public static void getOppoMove() {
         try {
             int box = Integer.parseInt(clientInput.readLine());
@@ -114,6 +114,10 @@ public class Game {
         }
     }
 
+    /**
+     * Function receives an output from the
+     * server to indicate if they have won or lost.
+     */
     public static void getResult() {
         try {
             primaryStage.show();
@@ -128,6 +132,11 @@ public class Game {
         }
     }
 
+    /**
+     * Function sends which button index was press by the client
+     * to the server.
+     * @param index index can range from 0-8.
+     */
     public static void updateBoard(int index) {
         clientOutput.println(index);
         try {
@@ -143,6 +152,10 @@ public class Game {
         }
     }
 
+    /**
+     * Function disconnects a client from the server.
+     * @throws IOException
+     */
     public void end() throws IOException {
         ButtonHandler.myTurn = false;
         turns = 0;
