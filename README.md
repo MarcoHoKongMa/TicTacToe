@@ -8,7 +8,7 @@ to play a game of tic tac toe.
 Ideally this application needs to be executed through an IDE such as intelliJ. Navigate to 
 the Server class under src/server/Server and execute the server Class. Once that is done two cients
 need to connect to the server by running the main class under src/client/clientInterface/Main. However,
-before doing that in the main class you need to pass your computers ip address as command line arguments
+before doing that in the main class you need to pass the servers ip address as command line argument
 when executing the Main class. Once that is done an interface will appear for the client.
 
 ![](resources/clientInterface.png)
