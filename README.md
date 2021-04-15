@@ -1,4 +1,4 @@
-#Tic Tac Toe
+# Tic Tac Toe
 
 ### Project Information:
 An application where two clients connect with each other through a TCP connection to a server
@@ -11,7 +11,7 @@ need to connect to the server by running the main class under src/client/clientI
 before doing that in the main class you need to pass your computers ip address as command line arguments
 when executing the Main class. Once that is done an interface will appear for the client.
 
-![](resources/clientinterface.png)
+![](resources/clientInterface.png)
 
 Once two clients click on the play button the game will begin. When it is someones turn their
 interface for the board will appear while for the other player their board will disappear to 
